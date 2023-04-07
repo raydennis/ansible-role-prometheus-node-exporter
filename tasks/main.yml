@@ -1,0 +1,11 @@
+---
+- name: Create Prometheus Node Exporter service
+  ansible.builtin.script: ../scripts/install-node-exporter.sh
+  args:
+    creates: /etc/systemd/system/node_exporter.service
+  register: command_output
+  when: ansible_facts['os_family'] == "RedHat"
+- debug:
+    var: command_output.stdout_lines
+
+
